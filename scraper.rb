@@ -17,7 +17,7 @@ end
 
 def wikinames_from(url)
   noko = noko_for(url)
-  names = noko.xpath('//table[.//th[text()="Constituency"]]//tr[td]//td[2]//a[not(@class="new")]/@title').map(&:text)
+  names = noko.xpath('//table[.//th[text()="Constituency"]]//tr[td]//td[5]//a[not(@class="new")]/@title').map(&:text)
   raise "No names found in #{url}" if names.count.zero?
   return names
 end
@@ -34,6 +34,6 @@ def fetch_info(names)
   end
 end
 
-fetch_info wikinames_from('https://en.wikipedia.org/wiki/List_of_current_members_of_the_Tanzanian_Parliament')
+fetch_info wikinames_from('https://en.wikipedia.org/wiki/List_of_MPs_elected_in_the_Tanzania_general_election,_2010')
 warn RestClient.post ENV['MORPH_REBUILDER_URL'], {} if ENV['MORPH_REBUILDER_URL']
 
