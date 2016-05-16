@@ -3,9 +3,14 @@
 
 require 'wikidata/fetcher'
 
-names = EveryPolitician::Wikidata.wikipedia_xpath( 
+names_10 = EveryPolitician::Wikidata.wikipedia_xpath( 
   url: 'https://en.wikipedia.org/wiki/List_of_MPs_elected_in_the_Tanzania_general_election,_2010',
   xpath: '//table[.//th[text()="Constituency"]]//tr[td]//td[5]//a[not(@class="new")]/@title',
 )
 
-EveryPolitician::Wikidata.scrape_wikidata(names: { en: names })
+names_15 = EveryPolitician::Wikidata.wikipedia_xpath( 
+  url: 'https://en.wikipedia.org/wiki/List_of_current_members_of_the_Tanzanian_Parliament',
+  xpath: '//table[.//th[text()="Constituency"]]//tr[td]//td[2]//a[not(@class="new")]/@title',
+)
+
+EveryPolitician::Wikidata.scrape_wikidata(names: { en: names_10 | names_15 })
