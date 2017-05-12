@@ -19,7 +19,7 @@ query = <<EOS
   WHERE
   {
     BIND(wd:Q17599130 AS ?membership)
-    BIND(wd:Q29579626 AS ?term)
+    BIND(wd:Q29579628 AS ?term)
 
     ?item p:P39 ?position_statement .
     ?position_statement ps:P39 ?membership .
