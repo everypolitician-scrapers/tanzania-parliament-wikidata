@@ -13,19 +13,7 @@ names_15 = EveryPolitician::Wikidata.wikipedia_xpath(
   xpath: '//table[.//th[text()="Constituency"]]//tr[td]//td[2]//a[not(@class="new")]/@title',
 )
 
-# Find all P39s of the 7th Term
-query = <<EOS
-  SELECT DISTINCT ?item
-  WHERE
-  {
-    BIND(wd:Q17599130 AS ?membership)
-    BIND(wd:Q29579628 AS ?term)
-
-    ?item p:P39 ?position_statement .
-    ?position_statement ps:P39 ?membership .
-    ?position_statement pq:P2937 ?term .
-  }
-EOS
+query = 'SELECT DISTINCT ?item WHERE { ?item wdt:P39 wd:Q17599130 .  }'
 p39s = EveryPolitician::Wikidata.sparql(query)
 
 EveryPolitician::Wikidata.scrape_wikidata(ids: p39s, names: { en: names_10 | names_15 })
